@@ -163,39 +163,6 @@
                             </div>
                         </div>
 
-                        {{-- default hide --}}
-                        <div class="row" id="institution-row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="institution_id" class="form-label">Polres <span class="text-danger">*</span></label>
-                                    <select class="form-select select2 @error('polres_id') is-invalid @enderror" 
-                                            id="polres_id" name="polres_id">
-                                        <option value="">Pilih Polres</option>
-                                        @foreach($polres as $pol)
-                                            <option value="{{ $pol->id }}" {{ old('polres_id') == $pol->id ? 'selected' : '' }}>
-                                                {{ ucfirst($pol->name) }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('polres_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6" id="polsek-row">
-                                <div class="mb-3">
-                                    <label for="polsek_id" class="form-label">Polsek <span class="text-danger">*</span></label>
-                                    <select class="form-select select2 @error('polsek_id') is-invalid @enderror" 
-                                            id="polsek_id" name="polsek_id">
-                                        <option value="">Pilih Polsek</option>
-                                    </select>
-                                    @error('polsek_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="d-flex justify-content-end gap-2">
                             <a href="{{ route('dashboard.users.index') }}" class="btn btn-secondary">
                                 <i class="fas fa-times"></i> Batal
@@ -246,23 +213,12 @@
     $(document).ready(function() {
         $('#institution-row').hide();
         var is_edit = {!! json_encode($is_edit) !!};
-        var polres_id = {!! json_encode($polres_id) !!};
-        var polsek_id = {!! json_encode($polsek_id) !!};
-
         // when $is_edit == true, remove required on password and confirmation_password
         if (is_edit) {
             $('#password-label').text('Password');
             $('#password-confirmation-label').text('Konfirmasi Password');
             $('#password').attr('required', false);
             $('#password_confirmation').attr('required', false);
-
-            var role = {!! json_encode($user?->roles->pluck('name')->first() ?? '') !!};
-            showHideInstitution(role)
-
-            if(polres_id){
-                $('#polres_id').val(polres_id).trigger('change');
-                getDataPolsek(polres_id, polsek_id)
-            }
         }
     });
     // Toggle password visibility
@@ -297,62 +253,5 @@
             return false;
         }
     });
-
-    // on change polres
-    $('#polres_id').change(function() {
-        let polres_id = $(this).val();
-        if (polres_id) {
-            getDataPolsek(polres_id)
-        } else {
-            $('#polsek_id').empty();
-            $('#polsek_id').append('<option value="">Pilih Polsek</option>');
-        }
-    });
-
-    // when role is Admin, hide institution row
-    $('#role').change(function() {
-        let role = $(this).val();
-        showHideInstitution(role)
-    });
-
-    function showHideInstitution(role){
-        if (role == 'admin') {
-            $('#institution-row').hide();
-        } else if (role == 'polda') {
-            $('#institution-row').hide();
-        } else if (role == 'polres') {
-            // add required polres_id
-            $('#polres_id').attr('required', true);
-            $('#institution-row').show();
-
-            // hide polsek
-            $('#polsek-row').hide();
-            // remove required polsek_id
-            $('#polsek_id').removeAttr('required');
-        } else if (role == 'polsek') {
-            // add required polsek_id
-            $('#polsek_id').attr('required', true);
-            $('#polsek-row').show();
-            $('#institution-row').show();
-        }
-    }
-
-    function getDataPolsek(polres_id, polsek_id = ""){
-        $.ajax({
-            url: '/dashboard/users/polsek/' + polres_id,
-            type: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                $('#polsek_id').empty();
-                $('#polsek_id').append('<option value="">Pilih Polsek</option>');
-                $.each(data, function(key, value) {
-                    $('#polsek_id').append('<option value="' + value.id + '">' + value.name + '</option>');
-                });
-                if(polsek_id){
-                    $('#polsek_id').val(polsek_id);
-                }
-            }
-        });
-    }
 </script>
 @endsection

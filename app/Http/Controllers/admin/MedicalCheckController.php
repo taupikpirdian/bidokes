@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\MedicalExamination;
+use Faker\Provider\Medical;
 use Illuminate\Http\Request;
 
-class ContactUsController extends Controller
+class MedicalCheckController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.contact-us.index');
+        return view('admin.medical.index');
     }
 
     /**
@@ -20,7 +22,9 @@ class ContactUsController extends Controller
      */
     public function create()
     {
-        //
+        $is_edit = false;
+        $data = null;
+        return view('admin.medical.create', compact('is_edit', 'data'));
     }
 
     /**
@@ -44,7 +48,9 @@ class ContactUsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $is_edit = true;
+        $data = MedicalExamination::findOrFail($id);
+        return view('admin.users.create', compact('is_edit', 'data'));
     }
 
     /**

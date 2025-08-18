@@ -14,15 +14,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // count users, exclude role admin spatie
-        $countUsers = User::count();
-        // count perkaras
-        $countPerkaras = Report::count();
-        // get report and group by polres_id and count
-        $perkaras = Report::select('polres_id', DB::raw('count(*) as total'))
-            ->groupBy('polres_id')
-            ->get();
-
+        $countUsers = 0;
+        $countPerkaras = 0;
+        $perkaras = [];
         return view('admin.index', compact('countUsers', 'countPerkaras', 'perkaras'));
     }
 

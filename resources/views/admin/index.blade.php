@@ -26,7 +26,7 @@
         <div class="small-box text-bg-primary">
           <div class="inner">
             <h3>{{ $countPerkaras }}</h3>
-            <p>Jumlah Data Perkara</p>
+            <p>Jumlah Data Pasien</p>
           </div>
           <svg
             class="small-box-icon"
@@ -61,7 +61,7 @@
         <div class="small-box text-bg-success">
           <div class="inner">
             <h3>{{ $countUsers }}</h3>
-            <p>Jumlah User Aktif</p>
+            <p>Jumlah Data Medical</p>
           </div>
           <svg
             class="small-box-icon"
@@ -85,38 +85,6 @@
       </div>
     </div>
     <!--end::Row-->
-
-    <div class="row">
-      <div class="col-lg-12 col-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="d-flex justify-content-between align-items-center w-100">
-                    <h3 class="card-title m-0">Data Perkara</h3>
-                </div>
-            </div>
-            <div class="card-body">
-            <table id="example" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Polres</th>
-                    <th>Jumlah Pengaduan</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach($perkaras as $perkara)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $perkara->polres->name ?? "-" }}</td>
-                        <td>{{ $perkara->total }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            </div>  
-        </div>
-      </div>
-    </div>
 </div>
 @endsection
 @section('scripts')

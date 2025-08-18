@@ -25,39 +25,5 @@ class RolesSeeder extends Seeder
                 "guard_name" => "web",
             ]);
         }
-
-        // add role polda, polres and polsek
-        $polda = Role::where("name", "polda")
-            ->where("guard_name", "web")
-            ->first();
-
-        if (!$polda) {
-            Role::create([
-                "name" => "polda",
-                "guard_name" => "web",
-            ]);
-        }
-
-        $polres = Role::where("name", "polres")
-            ->where("guard_name", "web")
-            ->first();
-
-        if (!$polres) {
-            Role::create([
-                "name" => "polres",
-                "guard_name" => "web",
-            ]);
-        }
-
-        $polsek = Role::where("name", "polsek")
-            ->where("guard_name", "web")
-            ->first();
-
-        if (!$polsek) {
-            Role::create([
-                "name" => "polsek",
-                "guard_name" => "web",
-            ]);
-        }
     }
 }

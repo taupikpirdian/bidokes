@@ -5,7 +5,7 @@
       <a href="./index.html" class="brand-link">
         <!--begin::Brand Image-->
         <img
-          src="{{ asset('assets/images/logo/logoops.png') }}"
+          src="{{ asset('assets/images/logo/logo.png') }}"
           alt="AdminLTE Logo"
           class="brand-image opacity-75 shadow"
         />
@@ -44,28 +44,13 @@
             </a>
           </li>
           @endif
-          <li class="nav-header">DATA PERKARA</li>
+          <li class="nav-header">Medical Check</li>
           <li class="nav-item">
-            <a href="{{ route('dashboard.perkaras.index') }}" class="nav-link">
+            <a href="{{ route('dashboard.medical.index') }}" class="nav-link">
               <i class="nav-icon bi bi-database"></i>
               <p>List Data</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('dashboard.public-reports.index') }}" class="nav-link">
-              <i class="nav-icon bi bi-database"></i>
-              <p>Laporan Masyarakat</p>
-            </a>
-          </li>
-          @if (auth()->user()->hasRole('admin'))
-          <li class="nav-header">SUPPORT</li>
-          <li class="nav-item">
-            <a href="{{ route('dashboard.about-us.index') }}" class="nav-link">
-              <i class="bi bi-info-circle"></i>
-              <p>Tentang Kami</p>
-            </a>
-          </li>
-          @endif
         </ul>
         <!--end::Sidebar Menu-->
       </nav>
