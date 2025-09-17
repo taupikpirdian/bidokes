@@ -14,12 +14,12 @@
 
 <div class="container py-5 text-center" id="login-section">
   <!-- Header -->
-  <h5 class="fw-bold">SISTEM AKSES TERINTEGRASI SECARA CEPAT <br/>FEEDBACK HASIL RIKKES</h5>
+  <h5 class="fw-bold">SISTEM AKSES TERINTEGRASI SECARA CEPAT <br/>"SATSET"</h5>
 
   <!-- Logo -->
   <img src="{{ asset('assets/images/logo/logo.png') }}" class="my-4" style="width:180px;" alt="Logo DOKKES">
 
-  <h3 class="fw-bold">SATSET</h3>
+  <h3 class="fw-bold"> FEEDBACK HASIL RIKKES BIDDOKKES POLDA JABAR</h3>
 
   <!-- Login Card -->
   <div class="card mx-auto mt-4" style="max-width:430px;">
